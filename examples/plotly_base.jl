@@ -11,9 +11,6 @@ using Dashboards, PlotlyBase
 JSON2.write(io::IO, p::Plot; kwargs...) = write(io, JSON.json(p))
 
 
-function make_graph_figure(coeff)
-   
-end
 app = Dash("Simple Slider", external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]) do
     html_div() do
         html_h1("PlotlyBase usage"),
