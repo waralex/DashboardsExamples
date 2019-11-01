@@ -1,0 +1,1 @@
+Examples for [Dashboards.jl](https://github.com/waralex/Dashboards)
