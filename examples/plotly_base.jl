@@ -1,6 +1,6 @@
 #=
 An example of using PlotlyBase interface for testing issue https://github.com/waralex/Dashboards/issues/1
-Basing on slider example
+Based on slider example
 =#
 import HTTP, JSON, JSON2
 
