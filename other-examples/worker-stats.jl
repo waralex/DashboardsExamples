@@ -1,3 +1,7 @@
+# Dashboards implementation of example from Dash Tutorial (section Dash Layout) (https://dash.plot.ly/getting-started)
+
+# Inspired by https://github.com/waralex/DashboardsExamples/blob/master/dash_tutorial/2_dash_layout_4.jl
+
 import HTTP, CSV, JSON
 using Dashboards, PlotlyBase, DataFrames
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
