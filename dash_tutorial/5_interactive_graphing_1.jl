@@ -8,12 +8,12 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 styles = (
     pre = (
         border = "thin lightgrey solid",
-        overflowX = "scroll" 
+        overflowX = "scroll"
     ),
 )
 
 app = Dash("Dash Layout", external_stylesheets=external_stylesheets) do
-    html_div() do        
+    html_div() do
         dcc_graph(
             id = "basic-interactions",
             figure = (
@@ -36,12 +36,12 @@ app = Dash("Dash Layout", external_stylesheets=external_stylesheets) do
                         mode = "markers",
                         marker = (size = 12,)
                     )
-                ], 
+                ],
                 layout = (clickmode = "event+select",)
             )
         ),
         html_div(className="three columns") do
-            dcc_markdown() do 
+            dcc_markdown() do
                 """**Hover Data**
 
                 Mouse over values in the graph."""
@@ -49,7 +49,7 @@ app = Dash("Dash Layout", external_stylesheets=external_stylesheets) do
             html_pre(id="hover-data", style=styles.pre)
         end,
         html_div(className="three columns") do
-            dcc_markdown() do 
+            dcc_markdown() do
                 """**Click Data**
 
                 Click on points in the graph."""
@@ -57,20 +57,20 @@ app = Dash("Dash Layout", external_stylesheets=external_stylesheets) do
             html_pre(id="click-data", style=styles.pre)
         end,
         html_div(className="three columns") do
-            dcc_markdown() do 
+            dcc_markdown() do
                 """**Selection Data**
 
                 Choose the lasso or rectangle tool in the graph's menu
                 bar and then select points in the graph.
 
-                Note that if `layout.clickmode = 'event+select'`, selection data also 
+                Note that if `layout.clickmode = 'event+select'`, selection data also
                 accumulates (or un-accumulates) selected data if you hold down the shift
                 button while clicking."""
             end,
             html_pre(id="selected-data", style=styles.pre)
         end,
         html_div(className="three columns") do
-            dcc_markdown() do 
+            dcc_markdown() do
                 """**Zoom and Relayout Data**
 
                 Click and drag on the graph to zoom or click on the zoom
