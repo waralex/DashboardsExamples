@@ -1,17 +1,20 @@
 import HTTP, CSV, JSON
 using Dashboards, PlotlyBase, DataFrames, Dates
+
+# Using Materialize CSS by Dogfalo
+# https://github.com/Dogfalo/materialize
 external_stylesheets = [
     "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
     "https://codepen.io/chriddyp/pen/bWLwgP.css",
-    "assets/styles.css",
+    "$(Base.source_dir())/assets/styles.css",
 ]
 
-ClassData = CSV.read("/data/Class_Data.csv")
+ClassData = CSV.read("$(Base.source_dir())/data/Class_Data.csv")
 
 app = Dash(
     "Report",
     external_stylesheets = external_stylesheets,
-    assets_folder = "assets",
+    assets_folder = "$(Base.source_dir())/assets"
 ) do
     html_div(className = "grey lighten-4") do
         html_br(),
@@ -19,6 +22,7 @@ app = Dash(
             html_div(className = "row container-min") do
                 html_div(className = "col s12 center-align blue white-text") do
                     html_br(),
+                    html_img(src="assets/julia.png", className="responsive-img"),
                     html_h2("Dashboards.jl"),
                     html_p("Report"),
                     html_br()
@@ -122,8 +126,8 @@ app = Dash(
                         )
                     )
                 end,
-                html_div() do
-                    dcc_graph(figure = Plot(df,
+                html_div(className = "col s12") do
+                    dcc_graph(figure = Plot(ClassData,
                                 Layout(
                                     xaxis_type = "log",
                                     xaxis_title = "Study",
