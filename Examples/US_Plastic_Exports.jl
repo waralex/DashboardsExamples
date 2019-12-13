@@ -1,5 +1,6 @@
 #This is an example dashboard implemented from the Dash python website. 
 # url: https://dash.plot.ly/dash-core-components
+# source of data: https://qz.com/122003/plastic-recycling-china-green-fence/
 
 import HTTP
 using Dashboards
