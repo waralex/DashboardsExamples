@@ -4,11 +4,9 @@
 
 import HTTP, CSV, JSON
 using Dashboards, PlotlyBase, DataFrames
-external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
-df = CSV.read(HTTP.get("https://people.sc.fsu.edu/~jburkardt/data/csv/biostats.csv").body)
-app = Dash("Dash Layout", external_stylesheets=external_stylesheets) do
+dashapp = Dash("Dash Layout", external_stylesheets=external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]) do
     html_div() do
-        dcc_graph(figure = Plot(df,
+        dcc_graph(figure = Plot(CSV.read(HTTP.get("https://people.sc.fsu.edu/~jburkardt/data/csv/biostats.csv").body),
                     Layout(xaxis_type = "log",
                         xaxis_title = "Weight (lbs)",
                         yaxis_title = "Height (in)",
@@ -27,6 +25,5 @@ app = Dash("Dash Layout", external_stylesheets=external_stylesheets) do
     end
 end
 
-handler = make_handler(app, debug = true)
+HTTP.serve(make_handler(dashapp, debug = true), HTTP.Sockets.localhost, 8080)
 println("Started at localhost:8080")
-HTTP.serve(handler, HTTP.Sockets.localhost, 8080)
