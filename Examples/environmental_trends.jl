@@ -1,12 +1,4 @@
 #Necessary packages
-import Pkg
-Pkg.add("Dashboards")
-Pkg.add("PlotlyJS")
-Pkg.add("DataFrames")
-Pkg.add("HTTP")
-Pkg.add("CSV")
-Pkg.add("JSON")
-Pkg.add("DataFramesMeta")
 using Dashboards, PlotlyJS, DataFrames, HTTP, CSV, JSON, DataFramesMeta
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
