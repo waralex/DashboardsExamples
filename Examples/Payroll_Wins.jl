@@ -27,5 +27,3 @@ end
 handler = make_handler(app, debug = true)
 println("Started at localhost:8000")
 HTTP.serve(handler, HTTP.Sockets.localhost, 8000)
-
-
