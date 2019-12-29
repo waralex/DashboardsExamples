@@ -1,9 +1,9 @@
 #Importing packages required
+import HTTP
 using Dashboards, PlotlyJS, DataFrames, HTTP, CSV, JSON, DataFramesMeta
 
 #getting the data
-df = CSV.read(HTTP.get('https://raw.githubusercontent.com/plotly/datasets/master/2014_ebola.csv'))
-
+df = CSV.read(HTTP.get("https://raw.githubusercontent.com/plotly/datasets/master/2014_ebola.csv").body)
 df = dropmissing(df)
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css","https://codepen.io/ihackyouridevice/pen/eYmEjOP.css"]
@@ -11,7 +11,7 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css","https://co
 
 #Constructing Dashboard Application
 app = Dash("Ebola Cases in Africa : PiePlot", external_stylesheets=external_stylesheets) do 
-    html_div do 
+    html_div() do 
         #heading 
         html_h1("Ebola Cases Reported in Africa - 2014",
         style=(
@@ -21,14 +21,14 @@ app = Dash("Ebola Cases in Africa : PiePlot", external_stylesheets=external_styl
             )
         )
         #actual graph
-        html_div(className = "container", style = (textAlign = "center", margin ="30px", padding = "10px", width="65%", margin-left="auto", margin-right="auto")) do 
+        html_div(className = "container", style = (textAlign = "center", margin ="30px", padding = "10px", width="65%", marginLeft="auto", marginRight="auto")) do 
             dcc_graph(id = "my-graph"),
             dcc_slider(
                 id = "month-selected",
                 min = 3,
-                max = 12
-                marks = Dict(3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October",
-                11 => "November", 12 => "December"),
+                max = 12,
+                marks = Dict(3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December"),
+
                 value = 8,
             )
         end
@@ -36,19 +36,17 @@ app = Dash("Ebola Cases in Africa : PiePlot", external_stylesheets=external_styl
 end
 
 callback!(app, callid"month-selected.value => my-graph.figure") do selected
-
     Plot(
+        df[df.Month .== selected, :],
         Layout(
             title = "Cases Reported Monthly",
             margin = Dict("l" => 300, "r" => 300),
             legend = Dict("x" => 1, "y" => 0.7)
         ),
-        marker = Dict("colors" => ['#EF963B', '#C93277', '#349600', '#EF533B', '#57D4F1']),
-        textinfo = "label",
-        df[df.Month .== selected, :],
+        marker = Dict("colors" => ["#EF963B", "#C93277", "#349600", "#EF533B", "#57D4F1"]),
+        textinfo = "label"
     )
-
-end 
+end
 
 
 handler = make_handler(app, debug = true)
