@@ -1,7 +1,7 @@
 Examples for [Dashboards.jl](https://github.com/waralex/Dashboards)
 
 # Running an example 
-You would need to run `julia <path_to_examle>`. All examples listen to `localhost:8080`.
+You would need to run `julia <path_to_example>`. All examples listen to `localhost:8080`.
 
 Once you run the example, open a web browser and go to `http://127.0.0.1:8080` in order to see your Dashboard. 
 
